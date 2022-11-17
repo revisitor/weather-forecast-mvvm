@@ -1,10 +1,12 @@
-package ru.mtrefelov.forecaster
+package ru.mtrefelov.forecaster.view
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import ru.mtrefelov.forecaster.core.Forecast
+import ru.mtrefelov.forecaster.databinding.ColdWeatherItemBinding
+import ru.mtrefelov.forecaster.databinding.HotWeatherItemBinding
 
 class ForecastsAdapter : ListAdapter<Forecast, ForecastViewHolder>(ItemCallback()) {
     private class ItemCallback : DiffUtil.ItemCallback<Forecast>() {
@@ -18,14 +20,13 @@ class ForecastsAdapter : ListAdapter<Forecast, ForecastViewHolder>(ItemCallback(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ForecastViewHolder {
-        return LayoutInflater.from(parent.context).run {
-            if (viewType == HOT_WEATHER_TYPE) {
-                val root = inflate(R.layout.hot_weather_item, parent, false)
-                ForecastViewHolder.Hot(root)
-            } else {
-                val root = inflate(R.layout.cold_weather_item, parent, false)
-                ForecastViewHolder.Cold(root)
-            }
+        val inflater = LayoutInflater.from(parent.context)
+        return if (viewType == HOT_WEATHER_TYPE) {
+            val binding = HotWeatherItemBinding.inflate(inflater, parent, false)
+            ForecastViewHolder.Hot(binding)
+        } else {
+            val binding = ColdWeatherItemBinding.inflate(inflater, parent, false)
+            ForecastViewHolder.Cold(binding)
         }
     }
 

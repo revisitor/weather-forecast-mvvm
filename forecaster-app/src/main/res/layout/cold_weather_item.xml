@@ -10,7 +10,7 @@
     android:paddingBottom="10dp">
 
     <TextView
-        android:id="@+id/cold_weather_datetime"
+        android:id="@+id/datetime"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
@@ -19,7 +19,7 @@
         tools:text="1970-01-01 00:00:00" />
 
     <TextView
-        android:id="@+id/cold_weather_temperature"
+        android:id="@+id/temperature"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="4dp"
@@ -43,6 +43,6 @@
         android:src="@drawable/cold_weather_item_icon"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@id/icon_temperature_divider"
-        app:layout_constraintTop_toBottomOf="@id/cold_weather_datetime" />
+        app:layout_constraintTop_toBottomOf="@id/datetime" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

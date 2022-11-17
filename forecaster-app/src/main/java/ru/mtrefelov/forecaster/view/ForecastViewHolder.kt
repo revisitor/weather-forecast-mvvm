@@ -1,10 +1,13 @@
-package ru.mtrefelov.forecaster
+package ru.mtrefelov.forecaster.view
 
 import android.view.View
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import ru.mtrefelov.forecaster.R
 import ru.mtrefelov.forecaster.core.Forecast
 import ru.mtrefelov.forecaster.core.timestampFormat
+import ru.mtrefelov.forecaster.databinding.ColdWeatherItemBinding
+import ru.mtrefelov.forecaster.databinding.HotWeatherItemBinding
 
 sealed class ForecastViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     protected abstract val datetime: TextView
@@ -15,29 +18,29 @@ sealed class ForecastViewHolder(itemView: View) : RecyclerView.ViewHolder(itemVi
         temperature.text = temperature.resources.getString(R.string.temperature_celsius, forecast.temperatureCelsius)
     }
 
-    class Cold(itemView: View) : ForecastViewHolder(itemView) {
-        override val datetime: TextView = itemView.findViewById(R.id.cold_weather_datetime)
-        override val temperature: TextView = itemView.findViewById(R.id.cold_weather_temperature)
-
-        override fun bind(forecast: Forecast) {
-            if (forecast.temperatureCelsius <= 0) {
-                super.bind(forecast)
-            } else {
-                throw IllegalArgumentException("temperature > 0")
-            }
-        }
-    }
-
-    class Hot(itemView: View) : ForecastViewHolder(itemView) {
-        override val datetime: TextView = itemView.findViewById(R.id.hot_weather_datetime)
-        override val temperature: TextView = itemView.findViewById(R.id.hot_weather_temperature)
+    class Cold(binding: ColdWeatherItemBinding) : ForecastViewHolder(binding.root) {
+        override val datetime: TextView = binding.datetime
+        override val temperature: TextView = binding.temperature
 
         override fun bind(forecast: Forecast) {
             if (forecast.temperatureCelsius > 0) {
-                super.bind(forecast)
-            } else {
+                throw IllegalArgumentException("temperature > 0")
+            }
+
+            super.bind(forecast)
+        }
+    }
+
+    class Hot(binding: HotWeatherItemBinding) : ForecastViewHolder(binding.root) {
+        override val datetime: TextView = binding.datetime
+        override val temperature: TextView = binding.temperature
+
+        override fun bind(forecast: Forecast) {
+            if (forecast.temperatureCelsius <= 0) {
                 throw IllegalArgumentException("temperature <= 0")
             }
+
+            super.bind(forecast)
         }
     }
 }

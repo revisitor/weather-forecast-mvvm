@@ -8,7 +8,7 @@
     android:paddingStart="6dp">
 
     <TextView
-        android:id="@+id/hot_weather_datetime"
+        android:id="@+id/datetime"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toTopOf="@id/hot_weather_icon"
@@ -25,7 +25,7 @@
         android:src="@drawable/hot_weather_item_icon"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/icon_temperature_divider"
-        app:layout_constraintTop_toBottomOf="@id/hot_weather_datetime" />
+        app:layout_constraintTop_toBottomOf="@id/datetime" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/icon_temperature_divider"
@@ -35,7 +35,7 @@
         app:layout_constraintGuide_percent="0.75" />
 
     <TextView
-        android:id="@+id/hot_weather_temperature"
+        android:id="@+id/temperature"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
