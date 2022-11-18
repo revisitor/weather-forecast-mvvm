@@ -26,14 +26,7 @@ private val loggingInterceptor = Interceptor { chain ->
         .method(original.method, original.body)
         .build()
 
-    val sendingTimeMs = System.currentTimeMillis()
-    Timber.d("Sending request ${request.url.host}")
-
-    val response = chain.proceed(request)
-    val duration = System.currentTimeMillis() - sendingTimeMs
-    Timber.d("Received response for ${response.request.url.host} in $duration ms")
-
-    response
+    chain.proceed(request)
 }
 
 private val httpLoggingInterceptor = HttpLoggingInterceptor().apply {
