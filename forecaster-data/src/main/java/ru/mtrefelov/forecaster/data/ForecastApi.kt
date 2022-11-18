@@ -1,11 +1,11 @@
 package ru.mtrefelov.forecaster.data
 
 import retrofit2.Call
-import retrofit2.http.GET
-import retrofit2.http.Query
+import retrofit2.http.*
 
 internal interface ForecastApi {
     @GET("data/2.5/forecast")
+    @Headers("Accept: application/json")
     fun getWeatherData(
         @Query("lat") latitude: Double,
         @Query("lon") longitude: Double,

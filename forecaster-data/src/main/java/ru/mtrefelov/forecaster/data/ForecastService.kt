@@ -3,31 +3,15 @@ package ru.mtrefelov.forecaster.data
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 
-import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-import retrofit2.Retrofit
+import retrofit2.*
 import retrofit2.converter.moshi.MoshiConverterFactory
 
-import ru.mtrefelov.forecaster.core.WeatherForecast
-import ru.mtrefelov.forecaster.core.Coordinates
-import ru.mtrefelov.forecaster.core.ForecastRepository
+import ru.mtrefelov.forecaster.core.*
 
 import timber.log.Timber
-
-private val loggingInterceptor = Interceptor { chain ->
-    val original = chain.request()
-    val request = original.newBuilder()
-        .header("Accept", "application/json")
-        .method(original.method, original.body)
-        .build()
-
-    chain.proceed(request)
-}
 
 private val httpLoggingInterceptor = HttpLoggingInterceptor().apply {
     level = HttpLoggingInterceptor.Level.HEADERS
@@ -36,7 +20,6 @@ private val httpLoggingInterceptor = HttpLoggingInterceptor().apply {
 }
 
 private val client = OkHttpClient.Builder()
-    .addInterceptor(loggingInterceptor)
     .addInterceptor(httpLoggingInterceptor)
     .build()
 
@@ -64,7 +47,10 @@ class ForecastService(private val apiKey: String) : ForecastRepository {
     }
 }
 
-private class ForecastCallback(private val action: (WeatherForecast) -> Unit) : Callback<ForecastResponse> {
+private class ForecastCallback(
+    private val action: (WeatherForecast) -> Unit
+) : Callback<ForecastResponse> {
+
     override fun onResponse(call: Call<ForecastResponse>, response: Response<ForecastResponse>) {
         response.body()?.run {
             val forecasts = details.map { it.toForecast() }
