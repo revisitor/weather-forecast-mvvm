@@ -14,10 +14,10 @@ import ru.mtrefelov.forecaster.viewmodel.ForecastViewModel
 class ForecastsFragment : Fragment() {
     private lateinit var forecastsAdapter: ForecastsAdapter
 
+    private val viewModel: ForecastViewModel by viewModels()
+
     private var _binding: ForecastsFragmentBinding? = null
     private val binding get() = _binding!!
-
-    private val viewModel: ForecastViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,15 +45,9 @@ class ForecastsFragment : Fragment() {
         }
 
         with(viewModel) {
-            if (savedInstanceState == null) {
-                fetchWeatherForecast {
-                    setToolbarTitle(it.place)
-                    setForecasts(it.forecasts)
-                }
-            } else {
-                setToolbarTitle(place)
-                setForecasts(forecasts)
-            }
+            place.observe(viewLifecycleOwner) { setToolbarTitle(it) }
+            forecasts.observe(viewLifecycleOwner) { setForecasts(it) }
+            if (savedInstanceState == null) fetchWeatherForecast()
         }
     }
 
