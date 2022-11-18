@@ -1,12 +1,10 @@
 package ru.mtrefelov.forecaster.view
 
-import android.view.LayoutInflater
-import android.view.ViewGroup
-import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.ListAdapter
+import android.view.*
+import androidx.recyclerview.widget.*
+
 import ru.mtrefelov.forecaster.core.Forecast
-import ru.mtrefelov.forecaster.databinding.ColdWeatherItemBinding
-import ru.mtrefelov.forecaster.databinding.HotWeatherItemBinding
+import ru.mtrefelov.forecaster.databinding.*
 
 class ForecastsAdapter : ListAdapter<Forecast, ForecastViewHolder>(ItemCallback()) {
     private class ItemCallback : DiffUtil.ItemCallback<Forecast>() {

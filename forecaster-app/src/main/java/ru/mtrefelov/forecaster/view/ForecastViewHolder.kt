@@ -2,12 +2,12 @@ package ru.mtrefelov.forecaster.view
 
 import android.view.View
 import android.widget.TextView
+
 import androidx.recyclerview.widget.RecyclerView
+
 import ru.mtrefelov.forecaster.R
-import ru.mtrefelov.forecaster.core.Forecast
-import ru.mtrefelov.forecaster.core.timestampFormat
-import ru.mtrefelov.forecaster.databinding.ColdWeatherItemBinding
-import ru.mtrefelov.forecaster.databinding.HotWeatherItemBinding
+import ru.mtrefelov.forecaster.core.*
+import ru.mtrefelov.forecaster.databinding.*
 
 sealed class ForecastViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     protected abstract val datetime: TextView
