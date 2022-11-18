@@ -58,9 +58,9 @@ class ForecastsFragment : Fragment() {
     }
 
     private fun setToolbarTitle(title: CharSequence) {
-        with(activity as AppCompatActivity) {
-            supportActionBar!!.title = title
-        }
+        (activity as AppCompatActivity)
+            .supportActionBar!!
+            .title = title
     }
 
     private fun setForecasts(forecasts: List<Forecast>) {
