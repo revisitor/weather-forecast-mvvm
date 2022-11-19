@@ -17,7 +17,7 @@ class ForecastViewModel : ViewModel() {
 
     private val coordinates = Coordinates(55.030204, 82.920430)
 
-    private val service = ForecastService(BuildConfig.API_KEY_OPEN_WEATHER)
+    private val service: ForecastRepository = ForecastService(BuildConfig.API_KEY_OPEN_WEATHER)
 
     fun fetchWeatherForecast() {
         service.getWeatherForecast(coordinates) {
