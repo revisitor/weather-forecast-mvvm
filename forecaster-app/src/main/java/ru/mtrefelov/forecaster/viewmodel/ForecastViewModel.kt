@@ -19,10 +19,10 @@ class ForecastViewModel : ViewModel() {
 
     private val service: ForecastRepository = ForecastService(BuildConfig.API_KEY_OPEN_WEATHER)
 
-    fun fetchWeatherForecast() {
-        service.getWeatherForecast(coordinates) {
-            _place.value = it.place
-            _forecasts.value = it.forecasts
+    suspend fun fetchWeatherForecast() {
+        service.getWeatherForecast(coordinates).let {
+            _place.postValue(it.place)
+            _forecasts.postValue(it.forecasts)
         }
     }
 }

@@ -6,6 +6,8 @@ import android.view.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.*
 import androidx.recyclerview.widget.LinearLayoutManager
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 import ru.mtrefelov.forecaster.core.Forecast
 import ru.mtrefelov.forecaster.databinding.ForecastsFragmentBinding
@@ -45,9 +47,19 @@ class ForecastsFragment : Fragment() {
         }
 
         with(viewModel) {
-            place.observe(viewLifecycleOwner) { setToolbarTitle(it) }
-            forecasts.observe(viewLifecycleOwner) { setForecasts(it) }
-            if (savedInstanceState == null) fetchWeatherForecast()
+            place.observe(viewLifecycleOwner) {
+                setToolbarTitle(it)
+            }
+
+            forecasts.observe(viewLifecycleOwner) {
+                setForecasts(it)
+            }
+
+            if (savedInstanceState == null) {
+                GlobalScope.launch {
+                    fetchWeatherForecast()
+                }
+            }
         }
     }
 
