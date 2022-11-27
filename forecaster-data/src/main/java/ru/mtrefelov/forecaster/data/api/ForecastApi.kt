@@ -1,4 +1,4 @@
-package ru.mtrefelov.forecaster.data
+package ru.mtrefelov.forecaster.data.api
 
 import retrofit2.http.*
 

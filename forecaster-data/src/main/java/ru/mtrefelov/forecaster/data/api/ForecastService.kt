@@ -1,8 +1,7 @@
-package ru.mtrefelov.forecaster.data
+package ru.mtrefelov.forecaster.data.api
 
-import ru.mtrefelov.forecaster.core.Coordinates
-import ru.mtrefelov.forecaster.core.ForecastRepository
-import ru.mtrefelov.forecaster.core.WeatherForecast
+import ru.mtrefelov.forecaster.core.*
+import ru.mtrefelov.forecaster.data.toCore
 
 class ForecastService(private val apiKey: String) : ForecastRepository {
     private val service = retrofit.create(ForecastApi::class.java)

@@ -1,4 +1,4 @@
-package ru.mtrefelov.forecaster.data
+package ru.mtrefelov.forecaster.data.api
 
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
@@ -21,7 +21,7 @@ private val moshi = Moshi.Builder()
     .addLast(KotlinJsonAdapterFactory())
     .build()
 
-val retrofit: Retrofit = Retrofit.Builder()
+internal val retrofit: Retrofit = Retrofit.Builder()
     .addConverterFactory(MoshiConverterFactory.create(moshi))
     .baseUrl("https://api.openweathermap.org/")
     .client(client)

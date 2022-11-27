@@ -5,18 +5,19 @@ import android.view.*
 
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.*
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
 import ru.mtrefelov.forecaster.core.Forecast
+import ru.mtrefelov.forecaster.data.DependencyContainer
 import ru.mtrefelov.forecaster.databinding.ForecastsFragmentBinding
 import ru.mtrefelov.forecaster.viewmodel.ForecastViewModel
 
 class ForecastsFragment : Fragment() {
     private lateinit var forecastsAdapter: ForecastsAdapter
-
-    private val viewModel: ForecastViewModel by viewModels()
+    private lateinit var viewModel: ForecastViewModel
 
     private var _binding: ForecastsFragmentBinding? = null
     private val binding get() = _binding!!
@@ -24,6 +25,13 @@ class ForecastsFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         forecastsAdapter = ForecastsAdapter()
+        viewModel = createViewModel()
+    }
+
+    private fun createViewModel(): ForecastViewModel {
+        val container = requireActivity().application as DependencyContainer
+        val factory = ForecastViewModel.Factory(container.getRepository(), container.getDao())
+        return ViewModelProvider(this, factory).get(ForecastViewModel::class.java)
     }
 
     override fun onCreateView(

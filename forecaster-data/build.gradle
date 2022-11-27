@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.library'
     id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
 }
 
 android {
@@ -30,10 +31,6 @@ android {
     }
 }
 
-ext {
-    retrofitVersion = '2.9.0'
-}
-
 dependencies {
     implementation project(path: ':forecaster-core')
 
@@ -43,5 +40,8 @@ dependencies {
     implementation 'com.squareup.okhttp3:logging-interceptor:4.10.0'
     implementation 'com.squareup.moshi:moshi-kotlin:1.14.0'
 
-    api 'com.jakewharton.timber:timber:5.0.1'
+    def roomVersion = '2.4.3'
+    api "androidx.room:room-runtime:$roomVersion"
+//    annotationProcessor "androidx.room:room-compiler:$roomVersion"
+    kapt "androidx.room:room-compiler:$roomVersion"
 }
