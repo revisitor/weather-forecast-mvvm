@@ -35,8 +35,8 @@ android {
 }
 
 dependencies {
-    implementation(project(":forecaster-core"))
 
+    implementation(project(":core"))
     val retrofitVersion = "2.9.0"
     implementation("com.squareup.retrofit2:retrofit:$retrofitVersion")
     implementation("com.squareup.retrofit2:converter-moshi:$retrofitVersion")

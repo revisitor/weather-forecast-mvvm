@@ -41,8 +41,8 @@ android {
 }
 
 dependencies {
-    implementation(project(":forecaster-core"))
-    implementation(project(":forecaster-data"))
+    implementation(project(":core"))
+    implementation(project(":data"))
 
     implementation("androidx.core:core-ktx:1.9.0")
     implementation("androidx.appcompat:appcompat:1.5.1")
