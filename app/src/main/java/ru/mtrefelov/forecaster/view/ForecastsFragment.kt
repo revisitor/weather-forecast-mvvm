@@ -1,10 +1,12 @@
 package ru.mtrefelov.forecaster.view
 
 import android.os.Bundle
-import android.view.*
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.*
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -55,14 +57,10 @@ class ForecastsFragment : Fragment() {
             layoutManager = LinearLayoutManager(view.context)
         }
 
-        with(viewModel) {
-            place.observe(viewLifecycleOwner) {
-                setToolbarTitle(it)
-            }
-
-            forecasts.observe(viewLifecycleOwner) {
-                setForecasts(it)
-            }
+        viewModel.weather.observe(viewLifecycleOwner) {
+            setToolbarTitle(it.place)
+            setForecasts(it.forecasts)
+        }
 
         viewModel.viewModelScope.launch {
             viewModel.fetchWeatherForecast()
