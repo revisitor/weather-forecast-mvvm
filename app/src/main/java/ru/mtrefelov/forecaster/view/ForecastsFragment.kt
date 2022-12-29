@@ -49,8 +49,7 @@ class ForecastsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        (activity as AppCompatActivity)
-            .setSupportActionBar(binding.toolbar)
+        (activity as AppCompatActivity).setSupportActionBar(binding.toolbar)
 
         binding.forecasts.apply {
             adapter = forecastsAdapter
@@ -62,8 +61,10 @@ class ForecastsFragment : Fragment() {
             setForecasts(it.forecasts)
         }
 
-        viewModel.viewModelScope.launch {
-            viewModel.fetchWeatherForecast()
+        if (savedInstanceState == null) {
+            viewModel.viewModelScope.launch {
+                viewModel.fetchWeatherForecast()
+            }
         }
     }
 
