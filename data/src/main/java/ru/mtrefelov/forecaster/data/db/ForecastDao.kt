@@ -8,11 +8,8 @@ import androidx.room.Query
 @Dao
 interface ForecastDao {
     @Query("SELECT * FROM forecast")
-    fun getAll(): List<ForecastEntity>
-
-    @Query("SELECT * FROM forecast WHERE timestamp = :timestamp")
-    fun findByTimestamp(timestamp: Long): ForecastEntity
+    suspend fun getAll(): List<ForecastEntity>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    fun insertAll(forecasts: List<ForecastEntity>)
+    suspend fun insertAll(forecasts: List<ForecastEntity>)
 }

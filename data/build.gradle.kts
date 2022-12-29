@@ -35,8 +35,8 @@ android {
 }
 
 dependencies {
-
     implementation(project(":core"))
+
     val retrofitVersion = "2.9.0"
     implementation("com.squareup.retrofit2:retrofit:$retrofitVersion")
     implementation("com.squareup.retrofit2:converter-moshi:$retrofitVersion")
@@ -46,4 +46,5 @@ dependencies {
     val roomVersion = "2.4.3"
     api("androidx.room:room-runtime:$roomVersion")
     kapt("androidx.room:room-compiler:$roomVersion")
+    implementation("androidx.room:room-ktx:$roomVersion")
 }
