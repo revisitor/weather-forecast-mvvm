@@ -1,6 +1,6 @@
 plugins {
-    id 'java-library'
-    id 'org.jetbrains.kotlin.jvm'
+    `java-library`
+    id("org.jetbrains.kotlin.jvm")
 }
 
 java {
@@ -9,5 +9,5 @@ java {
 }
 
 dependencies {
-    api 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4'
+    api("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
 }
