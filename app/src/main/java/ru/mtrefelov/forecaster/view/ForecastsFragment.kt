@@ -6,8 +6,9 @@ import android.view.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.*
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.viewModelScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import kotlinx.coroutines.GlobalScope
+
 import kotlinx.coroutines.launch
 
 import ru.mtrefelov.forecaster.core.Forecast
@@ -31,7 +32,7 @@ class ForecastsFragment : Fragment() {
     private fun createViewModel(): ForecastViewModel {
         val container = requireActivity().application as DependencyContainer
         val factory = ForecastViewModel.Factory(container.getRepository(), container.getDao())
-        return ViewModelProvider(this, factory).get(ForecastViewModel::class.java)
+        return ViewModelProvider(this, factory)[ForecastViewModel::class.java]
     }
 
     override fun onCreateView(
@@ -63,11 +64,8 @@ class ForecastsFragment : Fragment() {
                 setForecasts(it)
             }
 
-            if (savedInstanceState == null) {
-                GlobalScope.launch {
-                    fetchWeatherForecast()
-                }
-            }
+        viewModel.viewModelScope.launch {
+            viewModel.fetchWeatherForecast()
         }
     }
 
