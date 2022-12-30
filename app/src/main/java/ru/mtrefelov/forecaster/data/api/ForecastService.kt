@@ -2,7 +2,7 @@ package ru.mtrefelov.forecaster.data.api
 
 import retrofit2.http.*
 
-internal interface ForecastApi {
+interface ForecastService {
     @GET("data/2.5/forecast")
     @Headers("Accept: application/json")
     suspend fun getWeatherData(

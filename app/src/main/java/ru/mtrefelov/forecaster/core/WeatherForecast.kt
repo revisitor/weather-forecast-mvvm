@@ -12,5 +12,7 @@ data class WeatherForecast(
 
 data class Forecast(
     val temperatureCelsius: Double,
-    val timestamp: LocalDateTime
+    val timestamp: LocalDateTime,
 )
+
+data class Coordinates(val latitude: Double, val longitude: Double)

@@ -16,5 +16,3 @@ dependencyResolutionManagement {
 
 rootProject.name = "Forecaster"
 include(":app")
-include(":core")
-include(":data")
