@@ -17,7 +17,7 @@
         android:theme="@style/Theme.Forecaster"
         tools:targetApi="33">
         <activity
-            android:name="ru.mtrefelov.forecaster.view.MainActivity"
+            android:name="ru.mtrefelov.forecaster.activity.MainActivity"
             android:exported="true">
             <intent-filter>
                 <category android:name="android.intent.category.LAUNCHER" />

@@ -1,10 +1,13 @@
-package ru.mtrefelov.forecaster.view
+package ru.mtrefelov.forecaster.activity
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
+import androidx.compose.material.MaterialTheme
 import dagger.hilt.android.AndroidEntryPoint
+import ru.mtrefelov.forecaster.view.ForecastsScreen
+import ru.mtrefelov.forecaster.viewmodel.ForecastViewModel
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
@@ -13,7 +16,9 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            ForecastsScreen(viewModel)
+            MaterialTheme {
+                ForecastsScreen(viewModel)
+            }
         }
 
         if (savedInstanceState == null) {
